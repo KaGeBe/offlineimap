@@ -175,7 +175,7 @@ flagmap = [('\\Seen', 'S'),
            ('\\Draft', 'D')]
 
 def flagsimap2maildir(flags):
-    """Convert set([\\Draft, \\Deleted]) into a flags set(DR)"""
+    """Convert set([\\Draft, \\Deleted]) into a flags set('DR')"""
     retval = set()
     for imapflag, maildirflag in flagmap:
         if imapflag in flags:
@@ -183,7 +183,7 @@ def flagsimap2maildir(flags):
     return retval
 
 def flagsmaildir2imap(maildirflags):
-    """Convert set of flags ([DR]) into a set([\\Draft, \\Deleted])"""
+    """Convert set of flags set(['DR']) into a set([\\Draft, \\Deleted])"""
     retval = set()
     for imapflag, maildirflag in flagmap:
         if maildirflag in maildirflags:
