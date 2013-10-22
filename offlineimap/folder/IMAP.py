@@ -195,7 +195,6 @@ class IMAPFolder(BaseFolder):
                                           minor = 1)
             else:
                 uid = long(options['UID'])
-                assert type(flags) == str
                 flags = imaputil.flagstring2flagset(options['FLAGS'])
                 rtime = imaplibutil.Internaldate2epoch(messagestr)
                 self.messagelist[uid] = {'uid': uid, 'flags': flags, 'time': rtime}
@@ -705,7 +704,7 @@ class IMAPFolder(BaseFolder):
                 continue
             flagstr = attributehash['FLAGS']
             uid = long(attributehash['UID'])
-            assert type(flags) == str
+            assert type(flagstr) == str
             self.messagelist[uid]['flags'] = imaputil.flagstring2flagset(flagstr)
             try:
                 needupdate.remove(uid)
