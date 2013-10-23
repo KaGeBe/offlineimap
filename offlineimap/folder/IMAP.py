@@ -535,7 +535,6 @@ class IMAPFolder(BaseFolder):
 
                 #Do the APPEND
                 try:
-                    assert type(flags) == set
                     (typ, dat) = imapobj.append(self.getfullname(),
                                        imaputil.flagset2flagstring(flags),
                                        date, content)
@@ -634,7 +633,6 @@ class IMAPFolder(BaseFolder):
             except imapobj.readonly:
                 self.ui.flagstoreadonly(self, [uid], flags)
                 return
-            assert type(flags) == set
             result = imapobj.uid('store', '%d' % uid, 'FLAGS',
                                  imaputil.flagset2flagstring(flags))
             assert result[0] == 'OK', 'Error with store: ' + '. '.join(result[1])
@@ -645,7 +643,6 @@ class IMAPFolder(BaseFolder):
             self.messagelist[uid]['flags'] = flags
         else:
             flags = imaputil.flags2hash(imaputil.imapsplit(result)[1])['FLAGS']
-            assert type(flags) == str
             self.messagelist[uid]['flags'] = imaputil.flagstring2flagset(flags)
 
     def addmessageflags(self, uid, flags):
@@ -680,7 +677,6 @@ class IMAPFolder(BaseFolder):
             except imapobj.readonly:
                 self.ui.flagstoreadonly(self, uidlist, flags)
                 return
-            assert type(flags) == set
             r = imapobj.uid('store',
                             imaputil.uid_sequence(uidlist),
                             operation + 'FLAGS',
@@ -704,7 +700,6 @@ class IMAPFolder(BaseFolder):
                 continue
             flagstr = attributehash['FLAGS']
             uid = long(attributehash['UID'])
-            assert type(flagstr) == str
             self.messagelist[uid]['flags'] = imaputil.flagstring2flagset(flagstr)
             try:
                 needupdate.remove(uid)

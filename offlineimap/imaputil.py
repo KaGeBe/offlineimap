@@ -161,11 +161,13 @@ def imapsplit(imapstring):
 
 def flagstring2flagset(flagstring):
     """Convert string '(\\Draft Old)' into a flags set(['\\Draft', 'Old'])"""
+    assert type(flagstring) == str
     imapflaglist = flagstring[1:-1].split()
     return set(imapflaglist)
 
 def flagset2flagstring(flagset):
     """Convert flags set(['\\Draft', 'Old']) into a string '(\\Draft Old)'"""
+    assert type(flagset) == set
     return '(' + ' '.join(flagset) + ')'
 
 flagmap = [('\\Seen', 'S'),
